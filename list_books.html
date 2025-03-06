@@ -1,0 +1,48 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>list books</title>
+    <link rel="stylesheet" href="style/output.css">
+</head>
+
+<body>
+    <!-- Основной контейнер -->
+    <div class="container mx-auto p-4 max-w-md">
+        <!-- Заголовок страницы -->
+        <h1 class="text-2xl font-bold mb-4 text-center">Список книг</h1>
+
+        <!-- Форма для добавления книги -->
+        <form id="bookform" class="mb-4">
+            <!-- Поле ввода для названия книги -->
+            <div class="mb-2">
+                <label for="title" class="block text-sm font-medium text-gray-700">Название</label>
+                <input type="text" id="titleInput" required
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+
+            <!-- Поле ввода для имени автора -->
+            <div class="mb-2">
+                <label for="author" class="block text-sm font-medium text-gray-700">Автор</label>
+                <input type="text" id="authorInput" required
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+
+            <!-- Кнопка отправки формы -->
+            <button type="submit"
+                class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Добавить</button>
+        </form>
+
+        <!-- Список книг -->
+        <ul id="booklist" class="space-y-4">
+        </ul>
+
+        <!-- Сообщение, если нет книг -->
+        <p id="noBooksMessage" class="text-center text-gray-500">Нет добавленных книг</p>
+    </div>
+
+    <script src="list_book.js"></script>
+</body>
+
+</html>
