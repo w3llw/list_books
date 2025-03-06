@@ -68,7 +68,7 @@ bookList.addEventListener('click', deleteBook);
 function renderBook(book) {
     // HTML-шаблон для отображения книги
     const bookHTML = `
-        <li data-book-id="${book.id}" data-book-status="${book.status}" class="flex items-center justify-between p-4 bg-white rounded-md shadow-md">
+        <li data-book-id="${book.id}" data-book-status="${book.status}" class="flex items-center justify-between p-4 rounded-md shadow-md">
                 <div>
                     <h2 class="text-lg font-semibold">${book.title}</h2>
                     <p class="text-sm text-gray-600">${book.author}</p>
