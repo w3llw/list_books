@@ -68,18 +68,19 @@ bookList.addEventListener('click', deleteBook);
 function renderBook(book) {
     // HTML-шаблон для отображения книги
     const bookHTML = `
-        <li data-book-id="${book.id}" data-book-status="${book.status}" class="flex items-center justify-between p-4 rounded-md shadow-md">
-                <div>
-                    <h2 class="text-lg font-semibold">${book.title}</h2>
-                    <p class="text-sm text-gray-600">${book.author}</p>
-                </div>
-                <div class="flex items-center space-x-2">
+    <li data-book-id="${book.id}" data-book-status="${book.status}" class="flex items-center justify-between p-4 rounded-md shadow-md mb-2">
+
+        <div>
+            <h2 class="text-lg font-semibold">${book.title}</h2>
+            <p class="text-sm text-gray-600">${book.author}</p>
+        </div>
+            <div class="flex items-center space-x-2">
                 <label class="flex items-center space-x-1">
-                    <input type="checkbox" data-action="complete" class="h-5 w-5 text-green-600">
+                    <input type="checkbox" data-action="complete" class="h-5 w-5">
                     <span class="text-sm">Прочитано</span>
                 </label>
                     <button data-action="delete" class="bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-600">Удалить</button>
-                </div>
+            </div>
             </li>
     `;
 
@@ -100,7 +101,7 @@ function toggleComplete(evt) {
 
     const completeButton = evt.target;
     const book = completeButton.closest('li');  // Получаем <li> элемент книги
-    book.classList.toggle('bg-green-300');  // Переключаем фон для статуса "прочитано"
+    book.classList.toggle('bg-slate-300');  // Переключаем фон для статуса "прочитано"
 
     // Переключаем статус книги (прочитана/не прочитана)
     const bookStatus = book.dataset.bookStatus === 'false' ? false : true;
@@ -109,10 +110,37 @@ function toggleComplete(evt) {
     // Находим книгу в массиве и обновляем ее статус
     const bookId = book.dataset.bookId;
     const foundBook = books.find((book) => book.id === bookId);
-    foundBook.done = !bookStatus;  // Обновляем статус завершения книги
+    foundBook.status = !bookStatus;  // Обновляем статус завершения книги
 
     // Сохраняем обновленный массив книг в localStorage
     localStorage.setItem('books', JSON.stringify(books));
+}
+
+function renderBook(book) {
+    // HTML-шаблон для отображения книги
+    const bookHTML = `
+    <li data-book-id="${book.id}" data-book-status="${book.status}" class="flex items-center justify-between p-4 rounded-md shadow-md mb-2 ${book.status ? 'bg-slate-300' : ''}">
+        <div>
+            <h2 class="text-lg font-semibold">${book.title}</h2>
+            <p class="text-sm text-gray-600">${book.author}</p>
+        </div>
+            <div class="flex items-center space-x-2">
+                <label class="flex items-center space-x-1">
+                    <input type="checkbox" data-action="complete" class="h-5 w-5" ${book.status ? 'checked' : ''}>
+                    <span class="text-sm">Прочитано</span>
+                </label>
+                    <button data-action="delete" class="bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-600">Удалить</button>
+            </div>
+            </li>
+    `;
+
+    // Добавляем HTML книги в список книг
+    bookList.insertAdjacentHTML('beforeend', bookHTML);
+
+    // Если в списке есть книги, скрываем сообщение о том, что книг нет
+    if (bookList.children.length >= 1) {
+        noBooksMessage.classList.add('hidden');
+    }
 }
 
 

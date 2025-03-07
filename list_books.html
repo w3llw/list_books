@@ -5,14 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>list books</title>
     <link rel="stylesheet" href="style/output.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
 </head>
 
 <body>
     <!-- Основной контейнер -->
     <div class="container mx-auto p-4 max-w-md">
-        <!-- Заголовок страницы -->
-        <h1 class="text-2xl font-bold mb-4 text-center">Список книг</h1>
-
+        <!-- Заголовок страницы с иконкой книги -->
+        <div class="flex justify-center items-center mb-4 space-x-2">
+            <i class='bx bx-book-bookmark text-2xl'></i>
+            <h1 class="text-2xl font-bold">Список книг</h1>
+        </div>
         <!-- Форма для добавления книги -->
         <form id="bookform" class="mb-4">
             <!-- Поле ввода для названия книги -->
