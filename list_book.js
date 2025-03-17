@@ -15,6 +15,7 @@ if (savedBooks) {
     // Отображаем каждую книгу из localStorage
     booksFromLS.forEach((book) => {
         renderBook(book);
+        
     });
 }
 
@@ -67,16 +68,15 @@ bookList.addEventListener('click', deleteBook);
 
 function renderBook(book) {
     // HTML-шаблон для отображения книги
-    const bookHTML = `
-    <li data-book-id="${book.id}" data-book-status="${book.status}" class="flex items-center justify-between p-4 rounded-md shadow-md mb-2">
-
+    const bookHTML =  `
+    <li data-book-id="${book.id}" data-book-status="${book.status}" class="flex items-center justify-between p-4 rounded-md shadow-md mb-2 ${book.status ? 'bg-slate-300' : ''}">
         <div>
             <h2 class="text-lg font-semibold">${book.title}</h2>
             <p class="text-sm text-gray-600">${book.author}</p>
         </div>
             <div class="flex items-center space-x-2">
                 <label class="flex items-center space-x-1">
-                    <input type="checkbox" data-action="complete" class="h-5 w-5">
+                    <input type="checkbox" data-action="complete" class="h-5 w-5" ${book.status ? 'checked' : ''}>
                     <span class="text-sm">Прочитано</span>
                 </label>
                     <button data-action="delete" class="bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-600">Удалить</button>
@@ -115,34 +115,6 @@ function toggleComplete(evt) {
     // Сохраняем обновленный массив книг в localStorage
     localStorage.setItem('books', JSON.stringify(books));
 }
-
-function renderBook(book) {
-    // HTML-шаблон для отображения книги
-    const bookHTML = `
-    <li data-book-id="${book.id}" data-book-status="${book.status}" class="flex items-center justify-between p-4 rounded-md shadow-md mb-2 ${book.status ? 'bg-slate-300' : ''}">
-        <div>
-            <h2 class="text-lg font-semibold">${book.title}</h2>
-            <p class="text-sm text-gray-600">${book.author}</p>
-        </div>
-            <div class="flex items-center space-x-2">
-                <label class="flex items-center space-x-1">
-                    <input type="checkbox" data-action="complete" class="h-5 w-5" ${book.status ? 'checked' : ''}>
-                    <span class="text-sm">Прочитано</span>
-                </label>
-                    <button data-action="delete" class="bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-600">Удалить</button>
-            </div>
-            </li>
-    `;
-
-    // Добавляем HTML книги в список книг
-    bookList.insertAdjacentHTML('beforeend', bookHTML);
-
-    // Если в списке есть книги, скрываем сообщение о том, что книг нет
-    if (bookList.children.length >= 1) {
-        noBooksMessage.classList.add('hidden');
-    }
-}
-
 
 function deleteBook(evt) {
     // Срабатывает только если кликнут элемент с атрибутом "delete"
